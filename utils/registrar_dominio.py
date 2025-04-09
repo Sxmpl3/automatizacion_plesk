@@ -9,8 +9,6 @@ urllib3.disable_warnings() # Desactivar advertencias de SSL
 
 plesk_host = 'https://server-host-performance.agenciahawkins.com:8443'
 
-api_key = '5f3122b6-75c7-b695-106b-0989a4997ba9'
-
 def registrar_subdominio(subdomain):
     xml_payload = f'''<?xml version="1.0" encoding="UTF-8"?>
 <packet>

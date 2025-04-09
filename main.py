@@ -6,10 +6,6 @@ from utils.clonar_wordpress import clonar_wordpress
 
 app = Flask(__name__)  # Inicializar la app
 
-def valid_domain(domain):
-    patron = r'^https:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}$'
-    return re.match(patron, domain) is not None
-
 @app.route('/', methods=['POST'])
 def handle_post():
     try:
@@ -17,22 +13,14 @@ def handle_post():
         domain = data.get('domain')
         template = data.get('template')
 
-        if not domain or not valid_domain(domain):
-            return jsonify({
-                'status': 'error',
-                'message': 'Dominio no válido, usa formato https://tudominio.com'
-            }), 400
-        
-                
-        registrar_subdominio(domain)
+        subdomain_id = registrar_subdominio(domain)
         instalar_ssl(domain)
-        clonar_wordpress(domain, template)
+        clonar_wordpress(subdomain_id, template)
 
         return jsonify({
             'status': 'success',
             'message': 'Dominio añadido a plesk y plantilla clonada correctamente'
         }), 200
-
     except Exception as e:
         return jsonify({
             'status': 'error',
@@ -40,4 +28,4 @@ def handle_post():
         }), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=9000, debug=True)
+    app.run(host='localhost', port=9000, debug=True)
