@@ -1,6 +1,7 @@
-import re
+import time
 
 from flask import Flask, request, jsonify
+from utils.registrar_ionos import login, create_subdomain, change_dns
 from utils.registrar_dominio import registrar_subdominio, instalar_ssl
 from utils.clonar_wordpress import clonar_wordpress
 
@@ -12,6 +13,11 @@ def handle_post():
         data = request.get_json()
         domain = data.get('domain')
         template = data.get('template')
+
+        driver = login()
+        create_subdomain(driver)
+        time.sleep(900)
+        change_dns(driver)
 
         subdomain_id = registrar_subdominio(domain)
         instalar_ssl(domain)

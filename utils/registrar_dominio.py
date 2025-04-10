@@ -14,7 +14,7 @@ def registrar_subdominio(subdomain):
 <packet>
     <subdomain>
         <add>
-            <parent>hawkins.es</parent>
+            <parent>herasoft.ai</parent>
             <name>{subdomain}</name>
             <property>
                 <name>www_root</name>
@@ -56,8 +56,8 @@ def registrar_subdominio(subdomain):
 
 def instalar_ssl(dominio):
     os.system(f"""plesk bin extension --exec letsencrypt cli.php \
-      -d {dominio}.hawkins.es \
-      -d www.{dominio}.hawkins.es \
+      -d {dominio}.herasoft.ai \
+      -d www.{dominio}.herasoft.ai \
       -m dani.mefle@lchawkins.com \
       --agree-tos
     """)

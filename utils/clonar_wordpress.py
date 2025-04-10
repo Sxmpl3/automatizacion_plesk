@@ -1,7 +1,8 @@
 import os
 
 ids =  {
-    "Web 1": 617
+    "Web 1": 617,
+    "Web 2": 618
 }
 
 def clonar_wordpress(subdomain_id, plantilla):
