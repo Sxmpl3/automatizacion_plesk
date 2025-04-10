@@ -15,9 +15,9 @@ def handle_post():
         template = data.get('template')
 
         driver = login()
-        create_subdomain(driver)
+        create_subdomain(driver, domain)
         time.sleep(900)
-        change_dns(driver)
+        change_dns(driver, domain)
 
         subdomain_id = registrar_subdominio(domain)
         instalar_ssl(domain)
@@ -34,4 +34,4 @@ def handle_post():
         }), 500
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=9000, debug=True)
+    app.run(host='0.0.0.0', port=8787, debug=True)

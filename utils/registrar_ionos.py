@@ -9,7 +9,6 @@ from selenium.webdriver.chrome.options import Options
 domain = "testizan"
 
 url = "https://my.ionos.es/subdomains/herasoft.ai?linkId=ct.tab.domainlist.subdomains"
-url_subdomain = f"https://my.ionos.es/domain-details/{domain}.herasoft.ai"
 
 # Usuario y contraseña de IONOS
 user = "i-pointsite.com"
@@ -66,7 +65,7 @@ def create_subdomain(driver):
         subdomain_text = WebDriverWait(driver, 20).until(
             EC.presence_of_element_located((By.ID, "createSubdomain"))
         )
-        subdomain_text.send_keys("testizan")
+        subdomain_text.send_keys(f"{domain}")
 
         # Interactúa con el botón de enviar
         submit_btn = WebDriverWait(driver, 20).until(
@@ -78,10 +77,12 @@ def create_subdomain(driver):
     except Exception as e:
         print("Error al crear el subdominio:", e)
     
-def change_dns(driver):
+def change_dns(driver, domain):
     # Accedemos a la URL del subdominio
+    url_subdomain = f"https://my.ionos.es/domain-details/{domain}.herasoft.ai"
+
     driver.get(url_subdomain)
-    
+
     # Hacemos click a la ventana de configuracion de DNS
     dns_tab = WebDriverWait(driver, 20).until(
         EC.presence_of_element_located((By.ID, "domain-tab.dns"))
