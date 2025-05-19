@@ -30,7 +30,7 @@ def registrar_subdominio(subdomain):
 
     headers = {
         "Content-Type": "text/xml",
-        "HTTP_AUTH_LOGIN": "root", 
+        "HTTP_AUTH_LOGIN": "root",
         "HTTP_AUTH_PASSWD": "!KwP&8&9D1"
     }
 
